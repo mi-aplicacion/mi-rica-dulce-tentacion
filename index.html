@@ -99,60 +99,20 @@
         <button class="btn-toggle" onclick="toggleEditMode()">Activar/Desactivar Edición</button>
         <button class="btn-toggle" onclick="guardarCambios()" style="background-color: #27ae60;">Guardar Cambios</button>
     </div>
-    <div class="instruction">Activa la edición para hacer clic y modificar cualquier nombre o precio localmente.</div>
+    <div class="instruction">Activa la edición para hacer clic y modificar cualquier nombre o precio.</div>
 
     <div class="catalog-container" id="catalog">
         <script>
-            // ==========================================
-            // PRECIOS OFICIALES PARA TODO EL MUNDO:
-            // Cambia aquí los textos o precios si quieres 
-            // que se actualicen de forma definitiva al subirlo a GitHub.
-            // ==========================================
-            const preciosOficiales = {
-                1: { nombre: "Producto 1", precio: "1.000" },
-                2: { nombre: "Producto 2", precio: "1.000" },
-                3: { nombre: "Producto 3", precio: "1.000" },
-                4: { nombre: "Producto 4", precio: "1.000" },
-                5: { nombre: "Producto 5", precio: "1.000" },
-                6: { nombre: "Producto 6", precio: "1.000" },
-                7: { nombre: "Producto 7", precio: "1.000" },
-                8: { nombre: "Producto 8", precio: "1.000" },
-                9: { nombre: "Producto 9", precio: "1.000" },
-                10: { nombre: "Producto 10", precio: "1.000" },
-                11: { nombre: "Producto 11", precio: "1.000" },
-                12: { nombre: "Producto 12", precio: "1.000" },
-                13: { nombre: "Producto 13", precio: "1.000" },
-                14: { nombre: "Producto 14", precio: "1.000" },
-                15: { nombre: "Producto 15", precio: "1.000" },
-                16: { nombre: "Producto 16", precio: "1.000" },
-                17: { nombre: "Producto 17", precio: "1.000" },
-                18: { nombre: "Producto 18", precio: "1.000" },
-                19: { nombre: "Producto 19", precio: "1.000" },
-                20: { nombre: "Producto 20", precio: "1.000" },
-                21: { nombre: "Producto 21", precio: "1.000" },
-                22: { nombre: "Producto 22", precio: "1.000" },
-                23: { nombre: "Producto 23", precio: "1.000" },
-                24: { nombre: "Producto 24", precio: "1.000" },
-                25: { nombre: "Producto 25", precio: "1.000" },
-                26: { nombre: "Producto 26", precio: "1.000" },
-                27: { nombre: "Producto 27", precio: "1.000" },
-                28: { nombre: "Producto 28", precio: "1.000" },
-                29: { nombre: "Producto 29", precio: "1.000" },
-                30: { nombre: "Producto 30", precio: "1.000" },
-                31: { nombre: "Producto 31", precio: "1.000" },
-                32: { nombre: "Producto 32", precio: "1.000" },
-                33: { nombre: "Producto 33", precio: "1.000" },
-                34: { nombre: "Producto 34", precio: "1.000" },
-                35: { nombre: "Producto 35", precio: "1.000" },
-                36: { nombre: "Producto 36", precio: "1.000" }
-            };
+            // Lista exacta de tus fotos existentes (del 1 al 36, saltando el 5 que no está)
+            const fotosDisponibles = [
+                1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+                15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+            ];
 
-            for (let i = 1; i <= 36; i++) {
-                let defNombre = preciosOficiales[i] ? preciosOficiales[i].nombre : `Producto ${i}`;
-                let defPrecio = preciosOficiales[i] ? preciosOficiales[i].precio : "1.000";
-
-                let nombreGuardado = localStorage.getItem(`nombre_${i}`) || defNombre;
-                let precioGuardado = localStorage.getItem(`precio_${i}`) || defPrecio;
+            fotosDisponibles.forEach(i => {
+                let nombreGuardado = localStorage.getItem(`nombre_${i}`) || `Producto ${i}`;
+                let precioGuardado = localStorage.getItem(`precio_${i}`) || "1.000";
                 
                 document.write(`
                     <div class="product-card">
@@ -161,7 +121,7 @@
                         <div class="product-price editable" contenteditable="false" id="precio_box_${i}" data-type="precio" data-id="${i}">${precioGuardado}</div>
                     </div>
                 `);
-            }
+            });
         </script>
     </div>
 
@@ -184,7 +144,7 @@
                 const valor = el.innerText.trim();
                 localStorage.setItem(`${type}_${id}`, valor);
             });
-            alert('¡Cambios guardados localmente!');
+            alert('¡Cambios guardados en este computador!');
         }
     </script>
 
