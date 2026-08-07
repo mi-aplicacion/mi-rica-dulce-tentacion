@@ -91,7 +91,6 @@
 <body>
 
     <div class="header">
-        <!-- Logotipo correcto -->
         <img src="1000231200.jpg" alt="Logo Mi Rica Dulce Tentación" class="logo">
         <h1>Mi Rica Dulce Tentación</h1>
     </div>
@@ -104,18 +103,25 @@
 
     <div class="catalog-container" id="catalog">
         <script>
-            for (let i = 1; i <= 36; i++) {
+            // Lista exacta de tus fotos existentes (del 1 al 36, saltando el 5 que no está)
+            const fotosDisponibles = [
+                1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+                15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+            ];
+
+            fotosDisponibles.forEach(i => {
                 let nombreGuardado = localStorage.getItem(`nombre_${i}`) || `Producto ${i}`;
                 let precioGuardado = localStorage.getItem(`precio_${i}`) || "1.000";
                 
                 document.write(`
                     <div class="product-card">
-                        <img src="foto${i}.jpg" alt="Producto ${i}" onerror="this.src='foto1.jpg'">
+                        <img src="foto${i}.jpg" alt="Producto ${i}" onerror="this.style.display='none'">
                         <div class="product-name editable" contenteditable="false" id="nombre_box_${i}" data-type="nombre" data-id="${i}">${nombreGuardado}</div>
                         <div class="product-price editable" contenteditable="false" id="precio_box_${i}" data-type="precio" data-id="${i}">${precioGuardado}</div>
                     </div>
                 `);
-            }
+            });
         </script>
     </div>
 
