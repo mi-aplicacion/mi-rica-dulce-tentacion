@@ -1,26 +1,130 @@
 {
     "1": {
-        "nombre": "tos 12 unidades",
-        "precio": "$ 1.500"
+        "nombre": "palomitos 12 unidades",
+        "precio": "2.000"
     },
     "2": {
         "nombre": "paleta chica 20 unidades",
-        "precio": "$ 2.000"
+        "precio": "2.000"
     },
     "3": {
-        "nombre": "Trululu",
-        "precio": "$ 2.000"
+        "nombre": "Trululu 20 unidades",
+        "precio": "2.000"
     },
     "4": {
         "nombre": "combo 20 unidades",
-        "precio": "$2.000"
+        "precio": "2.000"
+    },
+    "6": {
+        "nombre": "helados invierno 20 unidades",
+        "precio": "3.500"
     },
     "7": {
-        "nombre": "Helados de invierno",
-        "precio": "1.000"
+        "nombre": "Helados de invierno 12 unidades",
+        "precio": "1.500"
     },
     "8": {
-        "nombre": "Malva coco",
-        "precio": "1.000"
+        "nombre": "Malva coco 36 unidades",
+        "precio": "3.500"
+    },
+    "9": {
+        "nombre": "sandwich 8 unidades",
+        "precio": "1.500"
+    },
+    "10": {
+        "nombre": "rueditas 12 unidades",
+        "precio": "1.500"
+    },
+    "11": {
+        "nombre": "guaguitas amanda 500 gramos",
+        "precio": "3.000"
+    },
+    "12": {
+        "nombre": "merenguitos 400 gramos",
+        "precio": "2.500"
+    },
+    "13": {
+        "nombre": "guaguitas 500 gramos",
+        "precio": "4.200"
+    },
+    "14": {
+        "nombre": "guaguitas 40 unidades",
+        "precio": "3.000"
+    },
+    "15": {
+        "nombre": "merengues 40 unidades",
+        "precio": "2.500"
+    },
+    "16": {
+        "nombre": "palomitos 12 unidades",
+        "precio": "1.500"
+    },
+    "17": {
+        "nombre": "palmeritas",
+        "precio": "3.500"
+    },
+    "18": {
+        "nombre": "cachitos",
+        "precio": "3.500"
+    },
+    "19": {
+        "nombre": "chilenitos 20 unidades",
+        "precio": "3.500"
+    },
+    "20": {
+        "nombre": "chilenitos  40 unidades",
+        "precio": "5.000"
+    },
+    "21": {
+        "nombre": "alfajor maicena",
+        "precio": "3.500"
+    },
+    "22": {
+        "nombre": "mendocinos 18 unidades",
+        "precio": "3.500"
+    },
+    "23": {
+        "nombre": "mendocinos 18 unidades",
+        "precio": "3.500"
+    },
+    "24": {
+        "nombre": "alemanas 20 unidades",
+        "precio": "3.500"
+    },
+    "25": {
+        "nombre": "huesitos 20 unidades",
+        "precio": "3.500"
+    },
+    "26": {
+        "nombre": "cuchuflis chocolate 50 unidades",
+        "precio": "4.000"
+    },
+    "27": {
+        "nombre": "cuchuflis 90 unidades",
+        "precio": "4.000"
+    },
+    "28": {
+        "nombre": "pelè 20 unidades",
+        "precio": "3.500"
+    },
+    "29": {
+        "nombre": "chilenitos con coco 20 unidades",
+        "precio": "3.500"
+    },
+    "30": {
+        "nombre": "delicias 20 unidades",
+        "precio": "3.500"
+    },
+    "31": {
+        "nombre": "delicias 20 unidades",
+        "precio": "3.500"
+    },
+    "32": {
+        "nombre": "camote 30 unidades",
+        "precio": "4.000"
+    },
+    "33": {
+        "nombre": "trufones 30 unidades",
+        "precio": "3.500"
     }
 }
