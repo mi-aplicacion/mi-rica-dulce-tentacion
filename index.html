@@ -3,201 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Rica Dulce Tentación</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Catálogo - Mi Rica Dulce Tentación</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fdf6f9;
-            margin: 0;
-            padding: 20px;
-            color: #4a2c2a;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: #6b2d5c;
-            margin-bottom: 10px;
-        }
-        .controles {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        #btn-editar {
-            background-color: #5a2a42;
-            color: white;
-        }
-        #btn-guardar {
-            background-color: #2e7d32;
-            color: white;
-        }
-        .catalogo {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .producto-card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .producto-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .producto-card h3 {
-            font-size: 18px;
-            margin: 15px 0 10px;
-        }
-        .producto-card .precio {
-            font-size: 20px;
-            font-weight: bold;
-            color: #88304e;
-        }
-        .editable {
-            border: 2px dashed #88304e;
-            background-color: #fff0f5;
-            outline: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #fef4f8; text-align: center; }
+        header { padding: 30px 20px; background: linear-gradient(135deg, #8e0e4e, #ad1457); color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; border: 4px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        .subtitulo { opacity: 0.9; font-size: 1rem; }
+        .barra-superior { background: white; padding: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .btn-agregar { background: #25d366; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+        .btn-agregar:hover { background: #1ebd56; transform: scale(1.03); }
+        .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 20px; max-width: 1200px; margin: auto; }
+        .producto { background: white; padding: 18px; border-radius: 14px; width: 240px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s; }
+        .producto:hover { transform: translateY(-5px); }
+        .producto img { width: 100%; height: 170px; object-fit: cover; border-radius: 10px; border: 1px solid #f0f0f0; }
+        .producto h3 { font-size: 1.1rem; color: #2d2d2d; padding: 6px; border-radius: 6px; transition: background 0.2s; }
+        .producto h3:focus, .editable:focus { outline: 2px solid #f0c8d8; background: #fef0f5; }
+        .editable { font-size: 0.95rem; color: #555; min-height: 50px; padding: 8px; border-radius: 6px; background: #fafafa; line-height: 1.4; transition: background 0.2s; }
+        .borrar { background: #ffebee; color: #c62828; border: none; padding: 6px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 4px; }
+        .borrar:hover { background: #ffcdd2; }
+        [contenteditable="true"]:empty:before { content: "👉 Escribe aquí..."; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="logo.jpg" alt="Mi Rica Dulce Tentación" style="max-height: 100px; border-radius: 50%;" onerror="this.style.display='none'">
-        <h1>Mi Rica Dulce Tentación</h1>
-        <p>Los mejores dulces y confites para ti</p>
-    </header>
+<header>
+    <img src="1000231200.jpg" alt="Logo Mi Rica Dulce Tentación" class="logo">
+    <h1>Mi Rica Dulce Tentación</h1>
+    <p class="subtitulo">✏️ Haz clic sobre cualquier texto para editarlo | Se guarda automáticamente</p>
+</header>
 
-    <div class="controles">
-        <button id="btn-editar" onclick="toggleEdicion()">Activar/Desactivar Edición</button>
-        <button id="btn-guardar" onclick="guardarCambios()">Guardar Cambios</button>
-        <p id="estado-edicion" style="font-size: 14px; margin-top: 8px; color: #666;">Edición desactivada.</p>
-    </div>
+<div class="barra-superior">
+    <button class="btn-agregar" onclick="agregarProducto()">➕ Agregar Nuevo Producto</button>
+</div>
 
-    <div class="catalogo" id="contenedor-catalogo"></div>
+<div class="contenedor" id="listaProductos">
 
-    <script>
-        const productosIniciales = [
-            { id: 1, nombre: "Palomitos 12 unidades", precio: "2000", imagen: "foto1.jpg" },
-            { id: 2, nombre: "Paleta grande", precio: "2000", imagen: "foto2.jpg" },
-            { id: 3, nombre: "Confites surtidos", precio: "1000", imagen: "foto3.jpg" },
-            { id: 4, nombre: "Palomitos 12 unidades", precio: "2000", imagen: "foto4.jpg" },
-            { id: 5, nombre: "Paleta grande", precio: "2000", imagen: "foto5.jpg" },
-            { id: 6, nombre: "Confites surtidos", precio: "1000", imagen: "foto6.jpg" },
-            { id: 7, nombre: "Chupetes miniatura", precio: "1000", imagen: "foto7.jpg" },
-            { id: 8, nombre: "Conos de marshmallow", precio: "1500", imagen: "foto8.jpg" },
-            { id: 9, nombre: "Marshmallows redondos", precio: "1500", imagen: "foto9.jpg" },
-            { id: 10, nombre: "Producto 10", precio: "2000", imagen: "foto10.jpg" },
-            { id: 11, nombre: "Producto 11", precio: "2000", imagen: "foto11.jpg" },
-            { id: 12, nombre: "Producto 12", precio: "2000", imagen: "foto12.jpg" },
-            { id: 13, nombre: "Producto 13", precio: "2000", imagen: "foto13.jpg" },
-            { id: 14, nombre: "Producto 14", precio: "2000", imagen: "foto14.jpg" },
-            { id: 15, nombre: "Producto 15", precio: "2000", imagen: "foto15.jpg" },
-            { id: 16, nombre: "Producto 16", precio: "2000", imagen: "foto16.jpg" },
-            { id: 17, nombre: "Producto 17", precio: "2000", imagen: "foto17.jpg" },
-            { id: 18, nombre: "Producto 18", precio: "2000", imagen: "foto18.jpg" },
-            { id: 19, nombre: "Producto 19", precio: "2000", imagen: "foto19.jpg" },
-            { id: 20, nombre: "Producto 20", precio: "2000", imagen: "foto20.jpg" },
-            { id: 21, nombre: "Producto 21", precio: "2000", imagen: "foto21.jpg" },
-            { id: 22, nombre: "Producto 22", precio: "2000", imagen: "foto22.jpg" },
-            { id: 23, nombre: "Producto 23", precio: "2000", imagen: "foto23.jpg" },
-            { id: 24, nombre: "Producto 24", precio: "2000", imagen: "foto24.jpg" },
-            { id: 25, nombre: "Producto 25", precio: "2000", imagen: "foto25.jpg" },
-            { id: 26, nombre: "Producto 26", precio: "2000", imagen: "foto26.jpg" },
-            { id: 27, nombre: "Producto 27", precio: "2000", imagen: "foto27.jpg" },
-            { id: 28, nombre: "Producto 28", precio: "2000", imagen: "foto28.jpg" },
-            { id: 29, nombre: "Producto 29", precio: "2000", imagen: "foto29.jpg" },
-            { id: 30, nombre: "Producto 30", precio: "2000", imagen: "foto30.jpg" },
-            { id: 31, nombre: "Producto 31", precio: "2000", imagen: "foto31.jpg" },
-            { id: 32, nombre: "Producto 32", precio: "2000", imagen: "foto32.jpg" },
-            { id: 33, nombre: "Producto 33", precio: "2000", imagen: "foto33.jpg" },
-            { id: 34, nombre: "Producto 34", precio: "2000", imagen: "foto34.jpg" },
-            { id: 35, nombre: "Producto 35", precio: "2000", imagen: "foto35.jpg" }
-        ];
+<div class="producto"><img src="foto1.jpg" alt="Producto"><h3 contenteditable="true">Surtido 1</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto2.jpg" alt="Producto"><h3 contenteditable="true">Pirulines / Surtido</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto3.jpg" alt="Producto"><h3 contenteditable="true">Trululu</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto4.jpg" alt="Producto"><h3 contenteditable="true">Combo</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto5.jpg" alt="Producto"><h3 contenteditable="true">Trutruanes</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto6.jpg" alt="Producto"><h3 contenteditable="true">Helados de Invierno</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto7.jpg" alt="Producto"><h3 contenteditable="true">Helados de Invierno</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto8.jpg" alt="Producto"><h3 contenteditable="true">Malva Coco</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto9.jpg" alt="Producto"><h3 contenteditable="true">Sándwich</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto10.jpg" alt="Producto"><h3 contenteditable="true">Rueditas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto11.jpg" alt="Producto"><h3 contenteditable="true">Guaguitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto12.jpg" alt="Producto"><h3 contenteditable="true">Merenguitos</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto13.jpg" alt="Producto"><h3 contenteditable="true">Guaguitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto14.jpg" alt="Producto"><h3 contenteditable="true">Guaguitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto15.jpg" alt="Producto"><h3 contenteditable="true">Guaguitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto16.jpg" alt="Producto"><h3 contenteditable="true">Guaguitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto17.jpg" alt="Producto"><h3 contenteditable="true">Merengues de Colores</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto18.jpg" alt="Producto"><h3 contenteditable="true">Palomitas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto19.jpg" alt="Producto"><h3 contenteditable="true">Palmeritas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto20.jpg" alt="Producto"><h3 contenteditable="true">Cachitos</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto21.jpg" alt="Producto"><h3 contenteditable="true">Chisitos</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto22.jpg" alt="Producto"><h3 contenteditable="true">Chisitos</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto23.jpg" alt="Producto"><h3 contenteditable="true">Alfajor Maicena</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto24.jpg" alt="Producto"><h3 contenteditable="true">Mendocinos</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto25.jpg" alt="Producto"><h3 contenteditable="true">Alfajores / Galletas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto26.jpg" alt="Producto"><h3 contenteditable="true">Hojarascas</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto27.jpg" alt="Producto"><h3 contenteditable="true">Corneta / Dulces</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
 
-        let modoEdicion = false;
+</div>
 
-        function obtenerProductos() {
-            const versionActual = "v3_forzada"; 
-            if (localStorage.getItem('version_app') !== versionActual) {
-                localStorage.clear();
-                localStorage.setItem('version_app', versionActual);
-            }
+<script>
+function agregarProducto(){const e=document.getElementById("listaProductos"),t=document.createElement("div");t.className="producto",t.innerHTML='<img src="foto-nueva.jpg" alt="Producto nuevo"><h3 contenteditable="true">Nombre del producto</h3><div class="editable" contenteditable="true">Descripción o precio</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button>',e.appendChild(t),guardarCatalogo()}
+function guardarCatalogo(){localStorage.setItem("catalogo",document.getElementById("listaProductos").innerHTML)}
+window.onload=function(){const e=localStorage.getItem("catalogo");e&&(document.getElementById("listaProductos").innerHTML=e)}
+document.addEventListener("blur",guardarCatalogo,!0)
+</script>
 
-            const guardados = localStorage.getItem('mi_rica_dulce_productos');
-            return guardados ? JSON.parse(guardados) : productosIniciales;
-        }
-
-        function renderizarCatalogo() {
-            const contenedor = document.getElementById('contenedor-catalogo');
-            const productos = obtenerProductos();
-            contenedor.innerHTML = '';
-
-            productos.forEach((prod, index) => {
-                contenedor.innerHTML += `
-                    <div class="producto-card">
-                        <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='foto4.jpg'">
-                        <h3 contenteditable="${modoEdicion}" class="${modoEdicion ? 'editable' : ''}" id="nombre-${index}">${prod.nombre}</h3>
-                        <div class="precio"> $<span contenteditable="${modoEdicion}" class="${modoEdicion ? 'editable' : ''}" id="precio-${index}">${prod.precio}</span></div>
-                    </div>
-                `;
-            });
-        }
-
-        function toggleEdicion() {
-            modoEdicion = !modoEdicion;
-            const estado = document.getElementById('estado-edicion');
-            if (modoEdicion) {
-                estado.textContent = "Edición ACTIVADA: Haz clic en los textos o precios para modificarlos.";
-                estado.style.color = "#2e7d32";
-            } else {
-                estado.textContent = "Edición desactivada.";
-                estado.style.color = "#666";
-            }
-            renderizarCatalogo();
-        }
-
-        function guardarCambios() {
-            const productos = obtenerProductos();
-            productos.forEach((prod, index) => {
-                const elementoNombre = document.getElementById(`nombre-${index}`);
-                const elementoPrecio = document.getElementById(`precio-${index}`);
-                if (elementoNombre) {
-                    const nuevoNombre = elementoNombre.textContent.trim();
-                    if (nuevoNombre) prod.nombre = nuevoNombre;
-                }
-                if (elementoPrecio) {
-                    const nuevoPrecio = elementoPrecio.textContent.trim();
-                    if (nuevoPrecio) prod.precio = nuevoPrecio;
-                }
-            });
-
-            localStorage.setItem('mi_rica_dulce_productos', JSON.stringify(productos));
-            modoEdicion = false;
-            document.getElementById('estado-edicion').textContent = "¡Cambios guardados correctamente!";
-            document.getElementById('estado-edicion').style.color = "#2e7d32";
-            renderizarCatalogo();
-        }
-
-        window.onload = renderizarCatalogo;
-    </script>
 </body>
 </html>
 
