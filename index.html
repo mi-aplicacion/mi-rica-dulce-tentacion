@@ -3,151 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Mi Rica Dulce Tentación</title>
+    <title>Mi Rica Dulce Tentación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fdf2f8;
+            background-color: #fdf6f9;
             margin: 0;
             padding: 20px;
+            color: #4a2c2a;
+        }
+        header {
             text-align: center;
-        }
-        .header {
-            margin-bottom: 15px;
-        }
-        .logo {
-            max-width: 220px;
-            height: auto;
-            border-radius: 50%;
-            border: 4px solid #b83280;
-            object-fit: cover;
+            margin-bottom: 30px;
         }
         h1 {
-            color: #b83280;
-            margin-top: 10px;
+            color: #6b2d5c;
             margin-bottom: 10px;
         }
-        .instruction {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
+        .controles {
+            text-align: center;
+            margin-bottom: 30px;
         }
-        /* Estilos de los botones de edición */
-        .btn-toggle {
-            background-color: #b83280;
-            color: white;
-            border: none;
+        button {
             padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            font-weight: bold;
         }
-        .btn-toggle:hover {
-            opacity: 0.9;
+        #btn-editar {
+            background-color: #5a2a42;
+            color: white;
         }
-        .catalog-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        #btn-guardar {
+            background-color: #2e7d32;
+            color: white;
+        }
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        .product-card {
+        .producto-card {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 220px;
+            border-radius: 10px;
             padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .product-card img {
+        .producto-card img {
             width: 100%;
-            height: 160px;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
         }
-        .product-name, .product-price {
-            font-size: 16px;
-            color: #333;
-            margin-top: 8px;
-            padding: 4px;
-            border: 1px dashed transparent;
+        .producto-card h3 {
+            font-size: 18px;
+            margin: 15px 0 10px;
         }
-        .product-price {
-            color: #b83280;
+        .producto-card .precio {
+            font-size: 20px;
             font-weight: bold;
+            color: #88304e;
         }
-        /* Modo edición activo */
-        .editing .product-name, .editing .product-price {
-            border: 1px dashed #b83280;
-            background-color: #fff0f6;
-            cursor: text;
+        .editable {
+            border: 2px dashed #88304e;
+            background-color: #fff0f5;
+            outline: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <img src="1000231200.jpg" alt="Logo Mi Rica Dulce Tentación" class="logo">
+    <header>
+        <img src="logo.jpg" alt="Mi Rica Dulce Tentación" style="max-height: 100px; border-radius: 50%;" onerror="this.style.display='none'">
         <h1>Mi Rica Dulce Tentación</h1>
+        <p>Los mejores dulces y confites para ti</p>
+    </header>
+
+    <div class="controles">
+        <button id="btn-editar" onclick="toggleEdicion()">Activar/Desactivar Edición</button>
+        <button id="btn-guardar" onclick="guardarCambios()">Guardar Cambios</button>
+        <p id="estado-edicion" style="font-size: 14px; margin-top: 8px; color: #666;">Edición desactivada.</p>
     </div>
-    
-    <div>
-        <button class="btn-toggle" onclick="toggleEditMode()">Activar/Desactivar Edición</button>
-        <button class="btn-toggle" onclick="guardarCambios()" style="background-color: #27ae60;">Guardar Cambios</button>
-    </div>
 
-    <div class="instruction">Activa la edición para hacer clic y modificar cualquier nombre o precio localmente.</div>
+    <div class="catalogo" id="contenedor-catalogo"></div>
 
-    <div class="catalog-container" id="catalog">
-        <script>
-            // Lista exacta de tus fotos disponibles (del 1 al 36, saltando el 5 que no está)
-            const fotosDisponibles = [
-                1, 2, 3, 4, 6, 7, 8, 9, 10, 
-                11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
-                21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 
-                31, 32, 33, 34, 35, 36
-            ];
+    <script>
+        const productosIniciales = [
+            { id: 1, nombre: "Palomitos 12 unidades", precio: "2000", imagen: "foto1.jpg" },
+            { id: 2, nombre: "Paleta grande", precio: "2000", imagen: "foto2.jpg" },
+            { id: 3, nombre: "Confites surtidos", precio: "1000", imagen: "foto3.jpg" },
+            { id: 4, nombre: "Palomitos 12 unidades", precio: "2000", imagen: "foto4.jpg" },
+            { id: 5, nombre: "Paleta grande", precio: "2000", imagen: "foto5.jpg" },
+            { id: 6, nombre: "Confites surtidos", precio: "1000", imagen: "foto6.jpg" },
+            { id: 7, nombre: "Chupetes miniatura", precio: "1000", imagen: "foto7.jpg" },
+            { id: 8, nombre: "Conos de marshmallow", precio: "1500", imagen: "foto8.jpg" },
+            { id: 9, nombre: "Marshmallows redondos", precio: "1500", imagen: "foto9.jpg" },
+            { id: 10, nombre: "Producto 10", precio: "2000", imagen: "foto10.jpg" },
+            { id: 11, nombre: "Producto 11", precio: "2000", imagen: "foto11.jpg" },
+            { id: 12, nombre: "Producto 12", precio: "2000", imagen: "foto12.jpg" },
+            { id: 13, nombre: "Producto 13", precio: "2000", imagen: "foto13.jpg" },
+            { id: 14, nombre: "Producto 14", precio: "2000", imagen: "foto14.jpg" },
+            { id: 15, nombre: "Producto 15", precio: "2000", imagen: "foto15.jpg" },
+            { id: 16, nombre: "Producto 16", precio: "2000", imagen: "foto16.jpg" },
+            { id: 17, nombre: "Producto 17", precio: "2000", imagen: "foto17.jpg" },
+            { id: 18, nombre: "Producto 18", precio: "2000", imagen: "foto18.jpg" },
+            { id: 19, nombre: "Producto 19", precio: "2000", imagen: "foto19.jpg" },
+            { id: 20, nombre: "Producto 20", precio: "2000", imagen: "foto20.jpg" },
+            { id: 21, nombre: "Producto 21", precio: "2000", imagen: "foto21.jpg" },
+            { id: 22, nombre: "Producto 22", precio: "2000", imagen: "foto22.jpg" },
+            { id: 23, nombre: "Producto 23", precio: "2000", imagen: "foto23.jpg" },
+            { id: 24, nombre: "Producto 24", precio: "2000", imagen: "foto24.jpg" },
+            { id: 25, nombre: "Producto 25", precio: "2000", imagen: "foto25.jpg" },
+            { id: 26, nombre: "Producto 26", precio: "2000", imagen: "foto26.jpg" },
+            { id: 27, nombre: "Producto 27", precio: "2000", imagen: "foto27.jpg" },
+            { id: 28, nombre: "Producto 28", precio: "2000", imagen: "foto28.jpg" },
+            { id: 29, nombre: "Producto 29", precio: "2000", imagen: "foto29.jpg" },
+            { id: 30, nombre: "Producto 30", precio: "2000", imagen: "foto30.jpg" },
+            { id: 31, nombre: "Producto 31", precio: "2000", imagen: "foto31.jpg" },
+            { id: 32, nombre: "Producto 32", precio: "2000", imagen: "foto32.jpg" },
+            { id: 33, nombre: "Producto 33", precio: "2000", imagen: "foto33.jpg" },
+            { id: 34, nombre: "Producto 34", precio: "2000", imagen: "foto34.jpg" },
+            { id: 35, nombre: "Producto 35", precio: "2000", imagen: "foto35.jpg" }
+        ];
 
-            fotosDisponibles.forEach(i => {
-                let nombreGuardado = localStorage.getItem(`nombre_${i}`) || (i === 1 ? "tos 12 unidades" : `Producto ${i}`);
-                let precioGuardado = localStorage.getItem(`precio_${i}`) || (i === 1 ? "1.900" : "1.000");
+        let modoEdicion = false;
 
-                document.write(`
-                    <div class="product-card">
-                        <img src="foto${i}.jpg" alt="Producto ${i}" onerror="this.style.display='none'">
-                        <div class="product-name" contenteditable="false" id="nombre_${i}">${nombreGuardado}</div>
-                        <div class="product-price" contenteditable="false" id="precio_${i}">${precioGuardado}</div>
+        function obtenerProductos() {
+            const guardados = localStorage.getItem('mi_rica_dulce_productos');
+            return guardados ? JSON.parse(guardados) : productosIniciales;
+        }
+
+        function renderizarCatalogo() {
+            const contenedor = document.getElementById('contenedor-catalogo');
+            const productos = obtenerProductos();
+            contenedor.innerHTML = '';
+
+            productos.forEach((prod, index) => {
+                contenedor.innerHTML += `
+                    <div class="producto-card">
+                        <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='foto4.jpg'">
+                        <h3 contenteditable="${modoEdicion}" class="${modoEdicion ? 'editable' : ''}" id="nombre-${index}">${prod.nombre}</h3>
+                        <div class="precio"> $<span contenteditable="${modoEdicion}" class="${modoEdicion ? 'editable' : ''}" id="precio-${index}">${prod.precio}</span></div>
                     </div>
-                `);
+                `;
+            });
+        }
+
+        function toggleEdicion() {
+            modoEdicion = !modoEdicion;
+            const estado = document.getElementById('estado-edicion');
+            if (modoEdicion) {
+                estado.textContent = "Edición ACTIVADA: Haz clic en los textos o precios para modificarlos.";
+                estado.style.color = "#2e7d32";
+            } else {
+                estado.textContent = "Edición desactivada.";
+                estado.style.color = "#666";
+            }
+            renderizarCatalogo();
+        }
+
+        function guardarCambios() {
+            const productos = obtenerProductos();
+            productos.forEach((prod, index) => {
+                const elementoNombre = document.getElementById(`nombre-${index}`);
+                const elementoPrecio = document.getElementById(`precio-${index}`);
+                if (elementoNombre) {
+                    const nuevoNombre = elementoNombre.textContent.trim();
+                    if (nuevoNombre) prod.nombre = nuevoNombre;
+                }
+                if (elementoPrecio) {
+                    const nuevoPrecio = elementoPrecio.textContent.trim();
+                    if (nuevoPrecio) prod.precio = nuevoPrecio;
+                }
             });
 
-            function toggleEditMode() {
-                const catalog = document.body;
-                catalog.classList.toggle('editing');
-                const isEditing = catalog.classList.contains('editing');
-                
-                document.querySelectorAll('.product-name, .product-price').forEach(el => {
-                    el.contentEditable = isEditing;
-                });
-            }
+            localStorage.setItem('mi_rica_dulce_productos', JSON.stringify(productos));
+            modoEdicion = false;
+            document.getElementById('estado-edicion').textContent = "¡Cambios guardados correctamente!";
+            document.getElementById('estado-edicion').style.color = "#2e7d32";
+            renderizarCatalogo();
+        }
 
-            function guardarCambios() {
-                fotosDisponibles.forEach(i => {
-                    let nuevoNombre = document.getElementById(`nombre_${i}`).innerText;
-                    let nuevoPrecio = document.getElementById(`precio_${i}`).innerText;
-                    localStorage.setItem(`nombre_${i}`, nuevoNombre);
-                    localStorage.setItem(`precio_${i}`, nuevoPrecio);
-                });
-                alert("¡Cambios guardados con éxito en este equipo!");
-                toggleEditMode();
-            }
-        </script>
-    </div>
-
+        window.onload = renderizarCatalogo;
+    </script>
 </body>
 </html>
 
