@@ -135,6 +135,12 @@
         let modoEdicion = false;
 
         function obtenerProductos() {
+            const versionActual = "v3_forzada"; 
+            if (localStorage.getItem('version_app') !== versionActual) {
+                localStorage.clear();
+                localStorage.setItem('version_app', versionActual);
+            }
+
             const guardados = localStorage.getItem('mi_rica_dulce_productos');
             return guardados ? JSON.parse(guardados) : productosIniciales;
         }
