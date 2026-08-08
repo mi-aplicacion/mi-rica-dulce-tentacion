@@ -1,0 +1,26 @@
+{
+    "1": {
+        "nombre": "tos 12 unidades",
+        "precio": "$ 1.500"
+    },
+    "2": {
+        "nombre": "paleta chica 20 unidades",
+        "precio": "$ 2.000"
+    },
+    "3": {
+        "nombre": "Trululu",
+        "precio": "$ 2.000"
+    },
+    "4": {
+        "nombre": "combo 20 unidades",
+        "precio": "$2.000"
+    },
+    "7": {
+        "nombre": "Helados de invierno",
+        "precio": "1.000"
+    },
+    "8": {
+        "nombre": "Malva coco",
+        "precio": "1.000"
+    }
+}
