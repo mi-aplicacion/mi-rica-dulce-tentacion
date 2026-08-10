@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Mi Rica Dulce Tentación</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff9f0; text-align: center; }
+        header { padding: 25px; background: linear-gradient(135deg, #8e0e4e, #ad1457); color: white; }
+        .logo { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; border: 4px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        .contacto { font-size: 0.95rem; opacity: 0.95; line-height: 1.5; margin-bottom: 10px; }
+        .horario { font-size: 0.9rem; opacity: 0.9; margin-top: 8px; }
+        .barra-superior { background: white; padding: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .btn-agregar { background: #25d366; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+        .btn-agregar:hover { background: #1ebd56; }
+        .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 20px; max-width: 1200px; margin: auto; }
+        .producto { background: #fff2dd; padding: 15px; border-radius: 14px; width: 260px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 8px; }
+        .producto img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; background: #f5e6d0; }
+        .producto h2 { font-size: 1.2rem; color: #2d2d2d; padding: 6px; }
+        .descripcion { font-size: 0.9rem; color: #666; min-height: 40px; padding: 5px; }
+        .precio { font-size: 1.6rem; color: #ad1457; font-weight: bold; padding: 6px; }
+        .editable { outline: 2px dashed transparent; transition: outline 0.2s; }
+        .editable:focus { outline: 2px dashed #f080b0; background: #ffe8f0; border-radius: 6px; }
+        .borrar { background: #ffebee; color: #c62828; border: none; padding: 6px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 5px; }
+        .borrar:hover { background: #ffcdd2; }
+        .categoria { width: 100%; text-align: left; font-size: 1.3rem; color: #8e0e4e; margin: 20px 0 5px 0; padding-bottom: 5px; border-bottom: 2px solid #f0c8d8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="1000231200.jpg" alt="Logo" class="logo">
+    <h1>🍬 Mi Rica Dulce Tentación</h1>
+    <div class="contacto editable" contenteditable="true">gerencia@gredysb.cl | +56 22850 5059</div>
+    <div class="horario editable" contenteditable="true">Lunes a Viernes: 08:00 a 19:00 • Sábados: 09:00 a 14:00 • Domingos y festivos: 09:00 a 14:00</div>
+</header>
+
+<div class="barra-superior">
+    <button class="btn-agregar" onclick="agregarProducto()">➕ Agregar Nuevo Producto</button>
+    <p style="margin-top:8px; font-size:0.85rem; color:#666;">💡 Fotos: foto1.jpg, foto2.jpg ... hasta foto36.jpg</p>
+</div>
+
+<div class="contenedor" id="listaProductos">
+
+<!-- ========== CEREALES ========== -->
+<h2 class="categoria">Cereales</h2>
+
+<div class="producto"><img src="foto1.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Arroz blanco</h2><div class="descripcion editable" contenteditable="true">20 unidades de 30 grs.</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto2.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Arroz colores</h2><div class="descripcion editable" contenteditable="true">20 unidades de 30 grs.</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto3.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Pólulos (50 gr)</h2><div class="descripcion editable" contenteditable="true">Arroz blanco / colores</div><div class="precio editable" contenteditable="true">$ 300</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto4.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Pólulos (140 gr)</h2><div class="descripcion editable" contenteditable="true">Arroz blanco / colores</div><div class="precio editable" contenteditable="true">$ 500</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto5.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Pólulos (300 gr)</h2><div class="descripcion editable" contenteditable="true">Arroz blanco / colores</div><div class="precio editable" contenteditable="true">$ 1.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto6.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Arroz largo</h2><div class="descripcion editable" contenteditable="true">20 unidades de 18 grs.</div><div class="precio editable" contenteditable="true">$ 1.200</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto7.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Saco de Pólulos 9kg</h2><div class="descripcion editable" contenteditable="true">Aprox. 9 kg</div><div class="precio editable" contenteditable="true">$ 27.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto8.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Saco de Pólulos 4,5kg</h2><div class="descripcion editable" contenteditable="true">Aprox. 4,5 kg</div><div class="precio editable" contenteditable="true">$ 21.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto9.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Saco de Arroz 12kg</h2><div class="descripcion editable" contenteditable="true">Aprox. 12 kg</div><div class="precio editable" contenteditable="true">$ 37.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto10.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Saco de Arroz 6kg</h2><div class="descripcion editable" contenteditable="true">Aprox. 6 kg</div><div class="precio editable" contenteditable="true">$ 27.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+
+<!-- ========== CARAMELOS ========== -->
+<h2 class="categoria">Caramelos</h2>
+
+<div class="producto"><img src="foto11.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Paleta chica</h2><div class="descripcion editable" contenteditable="true">10 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto12.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Paleta mediana</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto13.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Tetes</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto14.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Trululu</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto15.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Combo</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto16.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Arbolito</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 1.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+
+<!-- ========== SUSTANCIAS ========== -->
+<h2 class="categoria">Sustancias</h2>
+
+<div class="producto"><img src="foto17.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Helados de Invierno 20u</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.800</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto18.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Helados de Invierno 12u</h2><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 1.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto19.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Malva Coco 36u</h2><div class="descripcion editable" contenteditable="true">36 unidades</div><div class="precio editable" contenteditable="true">$ 2.800</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto20.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Sándwich</h2><div class="descripcion editable" contenteditable="true">8 unidades</div><div class="precio editable" contenteditable="true">$ 1.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto21.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Rueditas 12u</h2><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 1.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto22.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Rueditas 40u</h2><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 2.800</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto23.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Guaguitas 500g</h2><div class="descripcion editable" contenteditable="true">500 gramos</div><div class="precio editable" contenteditable="true">$ 3.800</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto24.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Merengues 500g</h2><div class="descripcion editable" contenteditable="true">500 gramos</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+
+<!-- ========== PASTELES ========== -->
+<h2 class="categoria">Pasteles</h2>
+
+<div class="producto"><img src="foto25.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Palomitos</h2><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 1.000</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto26.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Empolvados</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto27.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Pasteles surtidos</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.900</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto28.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Chilenos con Coco</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.900</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto29.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Alfajor Maicena</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.700</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto30.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Mendocinos</h2><div class="descripcion editable" contenteditable="true">18 unidades</div><div class="precio editable" contenteditable="true">$ 2.800</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto31.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Cuchuflís</h2><div class="descripcion editable" contenteditable="true">90 unidades</div><div class="precio editable" contenteditable="true">$ 3.200</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto32.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Cuchuflís Chocolate</h2><div class="descripcion editable" contenteditable="true">50 unidades</div><div class="precio editable" contenteditable="true">$ 3.200</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto33.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Barquillo</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto34.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Obleas</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.900</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto35.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Pelé</h2><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.600</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+<div class="producto"><img src="foto36.jpg" alt="Producto"><h2 class="editable" contenteditable="true">Camote</h2><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.100</div><button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button></div>
+
+</div>
+
+<script>
+function agregarProducto(){
+    const lista = document.getElementById("listaProductos");
+    const nuevo = document.createElement("div");
+    nuevo.className = "producto";
+    nuevo.innerHTML = `
+        <img src="foto-nueva.jpg" alt="Producto nuevo">
+        <h2 class="editable" contenteditable="true">Nombre del producto</h2>
+        <div class="descripcion editable" contenteditable="true">Cantidad o descripción</div>
+        <div class="precio editable" contenteditable="true">$ ----</div>
+        <button class="borrar" onclick="this.parentElement.remove()">🗑️ Eliminar</button>
+    `;
+    lista.appendChild(nuevo);
+}
+</script>
+
+</body>
+</html>
+
