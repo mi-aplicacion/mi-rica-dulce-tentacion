@@ -11,7 +11,33 @@
         button:hover {background:#1ebd56;}
         .btn-eliminar {background:#e53935; padding:5px 10px; font-size:13px; margin-top:8px;}
         .btn-eliminar:hover {background:#c62828;}
-        #mensaje {color:green; font-weight:bold; display:none; margin-top:8px; font-size:14px;}
+
+        /* Estilo especial para el botón de WhatsApp flotante */
+        .btn-whatsapp-flotante {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-whatsapp-flotante:hover {
+            background: #1ebd56;
+        }
+
+        .btn-facebook { background: #1877f2; }
+        .btn-facebook:hover { background: #145dbf; }
+        .btn-compartir-wa { background: #25d366; }
 
         header {padding:20px; background:#d81b60; color:white;}
         .logo {width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid white; margin-bottom:10px;}
@@ -29,11 +55,16 @@
 <body>
 
 <div class="barra-botones">
-    <p style="font-size:13px; color:#666; margin-bottom:8px;">💡 Edita directo → luego GUARDA y descarga el archivo</p>
-    <button onclick="guardarYDescargar()">💾 GUARDAR</button>
+    <p style="font-size:13px; color:#666; margin-bottom:8px;">💡 Edita los textos haciendo clic en ellos o agrega nuevos productos</p>
     <button onclick="agregarProducto()">➕ AGREGAR PRODUCTO</button>
-    <div id="mensaje">✅ ¡Guardado! Se descargó como index.html ✅</div>
+    <button onclick="compartirEnWhatsApp()" class="btn-compartir-wa">💬 Compartir Catálogo en WhatsApp</button>
+    <button onclick="compartirEnFacebook()" class="btn-facebook">📘 Compartir en Facebook</button>
 </div>
+
+<!-- Botón flotante abajo que envía directo a tu celular -->
+<a href="javascript:void(0);" onclick="consultarWhatsApp()" class="btn-whatsapp-flotante">
+    💬 Consultar por WhatsApp
+</a>
 
 <header>
     <img src="1000231200.jpg" alt="Logo" class="logo">
@@ -59,13 +90,10 @@
 <div class="producto"><img src="foto11.jpg"><h3 class="editable" contenteditable="true">Guagüitas Amanda</h3><div class="descripcion editable" contenteditable="true">Bolsa surtida</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto12.jpg"><h3 class="editable" contenteditable="true">merenguitos</h3><div class="descripcion editable" contenteditable="true">Bandeja redonda</div><div class="precio editable" contenteditable="true">$ 3.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto13.jpg"><h3 class="editable" contenteditable="true">guaguitas spark</h3><div class="descripcion editable" contenteditable="true">500 gramos</div><div class="precio editable" contenteditable="true">$ 4.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-
-
 <div class="producto"><img src="foto16.jpg"><h3 class="editable" contenteditable="true">guaguitas&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 
 <h2 class="categoria">Sustancias</h2>
 <div class="producto"><img src="foto17.jpg"><h3 class="editable" contenteditable="true">merengues</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-
 <div class="producto"><img src="foto19.jpg"><h3 class="editable" contenteditable="true">palmeritas</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto20.jpg"><h3 class="editable" contenteditable="true">cachitos</h3><div class="descripcion editable" contenteditable="true">12&nbsp; unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto21.jpg"><h3 class="editable" contenteditable="true">chilenitos</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
@@ -85,44 +113,16 @@
 <div class="producto"><img src="foto33.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto34.jpg"><h3 class="editable" contenteditable="true">camote</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.900</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto35.jpg"><h3 class="editable" contenteditable="true">trufones</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto36.jpg"><h3 class="editable" contenteditable="true">verona blanco</h3><div class="descripcion editable" contented="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+<div class="producto"><img src="foto36.jpg"><h3 class="editable" contenteditable="true">verona blanco</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 
-<!-- ============================================== -->
-<!-- 🆕 PRODUCTOS NUEVOS — DEL 37 AL 50 LISTOS -->
-<!-- Solo cambia la foto, el nombre y el precio -->
-<!-- ============================================== -->
 <h2 class="categoria">Nuevos Productos</h2>
 <div class="producto"><img src="foto37.jpg"><h3 class="editable" contenteditable="true">verona negro</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto38.jpg"><h3 class="editable" contenteditable="true">principes</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 <div class="producto"><img src="foto39.jpg"><h3 class="editable" contenteditable="true">gomones&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
 <script>
-function guardarYDescargar(){
-    const codigoCompleto = document.documentElement.outerHTML;
-    const archivo = new Blob([codigoCompleto], {type:"text/html;charset=utf-8"});
-    const enlace = document.createElement("a");
-    enlace.href = URL.createObjectURL(archivo);
-    enlace.download = "index.html";
-    document.body.appendChild(enlace);
-    enlace.click();
-    document.body.removeChild(enlace);
-    document.getElementById("mensaje").style.display = "block";
-    setTimeout(()=>document.getElementById("mensaje").style.display="none", 6000);
-}
-
 function eliminarProducto(boton){
     if(confirm("¿Eliminar este producto?")){
         boton.closest(".producto").remove();
@@ -137,8 +137,26 @@ function agregarProducto(){
     zona.appendChild(nuevo);
     window.scrollTo({top:zona.scrollHeight, behavior:"smooth"});
 }
+
+function consultarWhatsApp() {
+    const numeroTelefono = "56959732269";
+    const mensaje = "¡Hola! 🍬 Estuve viendo su catálogo en 'Mi Rica Dulce Tentación' y me gustaría hacerles un pedido o consultar por los productos. ¿Me pueden ayudar?";
+    const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(urlWhatsApp, "_blank");
+}
+
+function compartirEnWhatsApp() {
+    const texto = "¡Hola! Te invito a revisar el catálogo completo de dulces y pasteles en 'Mi Rica Dulce Tentación': " + window.location.href;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
+    window.open(url, "_blank");
+}
+
+function compartirEnFacebook() {
+    const urlPagina = window.location.href;
+    const urlFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlPagina)}`;
+    window.open(urlFacebook, "_blank");
+}
 </script>
 
-
-
 </body></html>
+
