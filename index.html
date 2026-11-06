@@ -4,15 +4,24 @@
     <title>Mi Rica Dulce Tentación</title>
     <style>
         * {margin:0; padding:0; box-sizing:border-box;}
-        body {font-family:Arial, sans-serif; background:#fff0f5; text-align:center;}
+        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#fff0f5; color:#333; text-align:center;}
 
-        .barra-botones {background:#fff3cd; padding:12px; border-bottom:3px solid #ffc107;}
-        button {background:#25d366; color:white; border:none; padding:10px 20px; border-radius:6px; font-size:15px; font-weight:bold; cursor:pointer; margin:4px;}
+        /* Barra de navegación estilo Aymaison (Pestañas principales) */
+        .barra-nav {background:#d81b60; padding:15px; display:flex; justify-content:center; flex-wrap:wrap; gap:15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+        .btn-nav {background:white; color:#d81b60; border:none; padding:10px 22px; border-radius:20px; font-size:16px; font-weight:bold; cursor:pointer; transition:all 0.2s;}
+        .btn-nav:hover, .btn-nav.activo {background:#ff4081; color:white;}
+
+        /* Barra de acciones generales */
+        .barra-botones {background:#fff3cd; padding:12px; border-bottom:3px solid #ffc107; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;}
+        button {background:#25d366; color:white; border:none; padding:10px 18px; border-radius:6px; font-size:14px; font-weight:bold; cursor:pointer;}
         button:hover {background:#1ebd56;}
         .btn-eliminar {background:#e53935; padding:5px 10px; font-size:13px; margin-top:8px;}
         .btn-eliminar:hover {background:#c62828;}
+        .btn-facebook { background: #1877f2; }
+        .btn-facebook:hover { background: #145dbf; }
+        .btn-compartir-wa { background: #25d366; }
 
-        /* Estilo especial para el botón de WhatsApp flotante */
+        /* Botón flotante de WhatsApp */
         .btn-whatsapp-flotante {
             position: fixed;
             bottom: 20px;
@@ -31,115 +40,187 @@
             text-decoration: none;
             transition: background 0.2s;
         }
-        .btn-whatsapp-flotante:hover {
-            background: #1ebd56;
-        }
+        .btn-whatsapp-flotante:hover { background: #1ebd56; }
 
-        .btn-facebook { background: #1877f2; }
-        .btn-facebook:hover { background: #145dbf; }
-        .btn-compartir-wa { background: #25d366; }
+        header {padding:25px; background:linear-gradient(135deg, #d81b60, #ad1457); color:white;}
+        /* Logotipo real incorporado */
+        .logo {width:140px; height:140px; border-radius:50%; object-fit:cover; border:4px solid white; margin-bottom:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);}
+        
+        /* Contenedor de las "Hojas" o Secciones principales estilo Aymaison */
+        .pagina-seccion {display: none; padding: 30px 20px; max-width: 1200px; margin: auto; text-align: left;}
+        .pagina-seccion.activa {display: block;}
 
-        header {padding:20px; background:#d81b60; color:white;}
-        .logo {width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid white; margin-bottom:10px;}
-        .contenedor {display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; max-width:1200px; margin:auto;}
-        .producto {background:white; padding:12px; border-radius:10px; width:230px;}
+        .contenedor {display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:15px;}
+        .producto {background:white; padding:12px; border-radius:12px; width:230px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition:transform 0.2s; text-align: center; border: 1px solid #fce4ec;}
+        .producto:hover {transform: translateY(-3px);}
         .producto img {width:100%; height:160px; object-fit:cover; border-radius:8px;}
         .producto h3 {font-size:16px; padding:5px;}
         .editable {outline:2px dashed transparent; transition:outline 0.2s;}
         .editable:focus {outline:2px dashed #f080b0; background:#ffe8f0; border-radius:4px;}
         .descripcion {font-size:13px; color:#777; padding:4px; min-height:36px;}
         .precio {font-size:20px; color:#d81b60; font-weight:bold; padding:6px;}
-        .categoria {width:100%; text-align:left; font-size:18px; color:#d81b60; margin:15px 0 5px; padding-bottom:4px; border-bottom:2px solid #f0c8d8;}
+        
+        .categoria-titulo {width:100%; text-align:left; font-size:20px; color:#d81b60; margin:25px 0 10px; padding-bottom:5px; border-bottom:2px solid #f0c8d8;}
+        
+        /* Estilo para la página de Nosotros */
+        .caja-nosotros {background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; max-width: 800px; margin: 20px auto;}
+        .caja-nosotros h2 {color: #d81b60; margin-bottom: 15px;}
+        .caja-nosotros p {font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 15px;}
     </style>
 </head>
 <body>
 
 <div class="barra-botones">
-    <p style="font-size:13px; color:#666; margin-bottom:8px;">💡 Edita los textos haciendo clic en ellos o agrega nuevos productos</p>
-    <button onclick="agregarProducto()">➕ AGREGAR PRODUCTO</button>
     <button onclick="compartirEnWhatsApp()" class="btn-compartir-wa">💬 Compartir Catálogo en WhatsApp</button>
     <button onclick="compartirEnFacebook()" class="btn-facebook">📘 Compartir en Facebook</button>
 </div>
 
-<!-- Botón flotante abajo que envía directo a tu celular -->
+<header>
+    <!-- Logotipo real adjuntado -->
+    <img src="1000231200.jpg" alt="Logo Mi Rica Dulce Tentación" class="logo">
+    <h1>🍬 Mi Rica Dulce Tentación</h1>
+    <p>rpulgarcitochico@gmail.com | Pedidos al fono:+56959732269
+</header>
+
+<!-- Menú estilo Aymaison (Pestañas de Navegación) -->
+<div class="barra-nav">
+    <button class="btn-nav activo" onclick="cambiarPagina('seccion-inicio', this)">🏠 Inicio</button>
+    <button class="btn-nav" onclick="cambiarPagina('seccion-nosotros', this)">📖 Nosotros</button>
+    <button class="btn-nav" onclick="cambiarPagina('seccion-catalogo', this)">📂 Catálogo de Productos</button>
+</div>
+
+<!-- Botón flotante siempre visible para pedidos por WhatsApp -->
 <a href="javascript:void(0);" onclick="consultarWhatsApp()" class="btn-whatsapp-flotante">
     💬 Consultar por WhatsApp
 </a>
 
-<header>
-    <img src="1000231200.jpg" alt="Logo" class="logo">
-    <h1>🍬 Mi Rica Dulce Tentación</h1>
-    <p>rpulgarcitochico@gmail.com | +56959732269</p>
-</header>
+<!-- ================= 1. PÁGINA DE INICIO ================= -->
+<div id="seccion-inicio" class="pagina-seccion activa" style="text-align: center;">
+    <div class="caja-nosotros" style="background: linear-gradient(135deg, #fff, #ffe8f0);">
+        <h2>¡Bienvenidos a Mi Rica Dulce Tentación! 🍬</h2>
+        <p>Los mejores dulces, caramelos, sustancias y pasteles tradicionales para endulzar tus momentos especiales o para tu emprendimiento.</p>
+        <p>Haz clic en el menú superior en <b>"Catálogo de Productos"</b> para revisar toda nuestra variedad y hacer tus pedidos de tortas directamente al fono <b> +5694868 5224
 
-<div class="contenedor" id="zonaProductos">
 
-<h2 class="categoria">dulces</h2>
-<div class="producto"><img src="foto1.jpg"><h3 class="editable" contenteditable="true">palomitos</h3><div class="descripcion editable" contenteditable="true">12 unidades.</div><div class="precio editable" contenteditable="true">$ 1.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto2.jpg"><h3 class="editable" contenteditable="true">paleta chica</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto3.jpg"><h3 class="editable" contenteditable="true">trululù</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto4.jpg"><h3 class="editable" contenteditable="true">combo</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto5.jpg"><h3 class="editable" contenteditable="true">trufones</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto6.jpg"><h3 class="editable" contenteditable="true">helado invierno</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto7.jpg"><h3 class="editable" contenteditable="true">helado invierno</h3><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto8.jpg"><h3 class="editable" contenteditable="true">malva coco</h3><div class="descripcion editable" contenteditable="true">36 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto9.jpg"><h3 class="editable" contenteditable="true">sandwich</h3><div class="descripcion editable" contenteditable="true">8 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto10.jpg"><h3 class="editable" contenteditable="true">rueditas</h3><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 
-<h2 class="categoria">Caramelos</h2>
-<div class="producto"><img src="foto11.jpg"><h3 class="editable" contenteditable="true">Guagüitas Amanda</h3><div class="descripcion editable" contenteditable="true">Bolsa surtida</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto12.jpg"><h3 class="editable" contenteditable="true">merenguitos</h3><div class="descripcion editable" contenteditable="true">Bandeja redonda</div><div class="precio editable" contenteditable="true">$ 3.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto13.jpg"><h3 class="editable" contenteditable="true">guaguitas spark</h3><div class="descripcion editable" contenteditable="true">500 gramos</div><div class="precio editable" contenteditable="true">$ 4.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto16.jpg"><h3 class="editable" contenteditable="true">guaguitas&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
 
-<h2 class="categoria">Sustancias</h2>
-<div class="producto"><img src="foto17.jpg"><h3 class="editable" contenteditable="true">merengues</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto19.jpg"><h3 class="editable" contenteditable="true">palmeritas</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto20.jpg"><h3 class="editable" contenteditable="true">cachitos</h3><div class="descripcion editable" contenteditable="true">12&nbsp; unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto21.jpg"><h3 class="editable" contenteditable="true">chilenitos</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto22.jpg"><h3 class="editable" contenteditable="true">chilenitos</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 5.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto23.jpg"><h3 class="editable" contenteditable="true">alfajor ,aicena</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto24.jpg"><h3 class="editable" contenteditable="true">mendocinos</h3><div class="descripcion editable" contenteditable="true">18 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <button onclick="cambiarPagina('seccion-catalogo', document.querySelectorAll('.btn-nav')[2])" style="background: #d81b60; font-size: 16px; padding: 12px 25px; margin-top: 15px;">Ver Catálogo Completo ➔</button>
+    </div>
+</div>
 
-<h2 class="categoria">Pasteles</h2>
-<div class="producto"><img src="foto25.jpg"><h3 class="editable" contenteditable="true">alfajores</h3><div class="descripcion editable" contenteditable="true">14 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto26.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto27.jpg"><h3 class="editable" contenteditable="true">huesitos</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto28.jpg"><h3 class="editable" contenteditable="true">cuchufli</h3><div class="descripcion editable" contenteditable="true">50 unidades</div><div class="precio editable" contenteditable="true">$4.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto29.jpg"><h3 class="editable" contenteditable="true">cuchufli</h3><div class="descripcion editable" contenteditable="true">90 unidades</div><div class="precio editable" contenteditable="true">$ 4.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto30.jpg"><h3 class="editable" contenteditable="true">pelè</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto31.jpg"><h3 class="editable" contenteditable="true">chilenitos coco</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto32.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto33.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto34.jpg"><h3 class="editable" contenteditable="true">camote</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.900</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto35.jpg"><h3 class="editable" contenteditable="true">trufones</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto36.jpg"><h3 class="editable" contenteditable="true">verona blanco</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+<!-- ================= 2. PÁGINA DE NOSOTROS ================= -->
+<div id="seccion-nosotros" class="pagina-seccion">
+    <div class="caja-nosotros">
+        <h2>¿Quiénes Somos?</h2>
+        <p>En <b>Mi Rica Dulce Tentación</b> nos dedicamos con pasión a llevar los dulces más ricos, frescos y variados directamente a tus manos. Trabajamos con una amplia selección de pasteles, alfajores, cuchuflis, gomones y caramelos ideales tanto para regalar como para surtir tus propios negocios.</p>
+        <p>Nos enorgullece ofrecer una atención cercana y rápida a través de nuestro WhatsApp oficial. ¡Confía en nosotros para endulzar tu día!</p>
+        <p style="font-weight: bold; color: #d81b60;">📞 Pedidos de tortas al fono: 9 4868 5224
+    </div>
+</div>
 
-<h2 class="categoria">Nuevos Productos</h2>
-<div class="producto"><img src="foto37.jpg"><h3 class="editable" contenteditable="true">verona negro</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto38.jpg"><h3 class="editable" contenteditable="true">principes</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
-<div class="producto"><img src="foto39.jpg"><h3 class="editable" contenteditable="true">gomones&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+<!-- ================= 3. PÁGINA DE CATÁLOGO (CENTRAL Y COMPLETO) ================= -->
+<div id="seccion-catalogo" class="pagina-seccion" style="text-align: center;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
+        <h2 style="color: #d81b60; margin: 0;">Catálogo Completo</h2>
+        <button onclick="preguntarYAgregarProducto()" style="background: #25d366;">➕ Agregar Producto al Catálogo</button>
+    </div>
 
+    <!-- Contenedor con todo tu catálogo original intacto centrado -->
+    <div class="contenedor" id="zonaCatalogoPrincipal">
+
+        <h2 class="categoria-titulo">dulces</h2>
+        <div class="producto"><img src="foto1.jpg"><h3 class="editable" contenteditable="true">palomitos</h3><div class="descripcion editable" contenteditable="true">12 unidades.</div><div class="precio editable" contenteditable="true">$ 1.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto2.jpg"><h3 class="editable" contenteditable="true">paleta chica</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto3.jpg"><h3 class="editable" contenteditable="true">trululù</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto4.jpg"><h3 class="editable" contenteditable="true">combo</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 2.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto5.jpg"><h3 class="editable" contenteditable="true">trufones</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto6.jpg"><h3 class="editable" contenteditable="true">helado invierno</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto7.jpg"><h3 class="editable" contenteditable="true">helado invierno</h3><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto8.jpg"><h3 class="editable" contenteditable="true">malva coco</h3><div class="descripcion editable" contenteditable="true">36 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto9.jpg"><h3 class="editable" contenteditable="true">sandwich</h3><div class="descripcion editable" contenteditable="true">8 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto10.jpg"><h3 class="editable" contenteditable="true">rueditas</h3><div class="descripcion editable" contenteditable="true">12 unidades</div><div class="precio editable" contenteditable="true">$ 2.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+
+        <h2 class="categoria-titulo">Caramelos</h2>
+        <div class="producto"><img src="foto11.jpg"><h3 class="editable" contenteditable="true">Guagüitas Amanda</h3><div class="descripcion editable" contenteditable="true">Bolsa surtida</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto12.jpg"><h3 class="editable" contenteditable="true">merenguitos</h3><div class="descripcion editable" contenteditable="true">Bandeja redonda</div><div class="precio editable" contenteditable="true">$ 3.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto13.jpg"><h3 class="editable" contenteditable="true">guaguitas spark</h3><div class="descripcion editable" contenteditable="true">500 gramos</div><div class="precio editable" contenteditable="true">$ 4.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto16.jpg"><h3 class="editable" contenteditable="true">guaguitas&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+
+        <h2 class="categoria-titulo">Sustancias</h2>
+        <div class="producto"><img src="foto17.jpg"><h3 class="editable" contenteditable="true">merengues</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto19.jpg"><h3 class="editable" contenteditable="true">palmeritas</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto20.jpg"><h3 class="editable" contenteditable="true">cachitos</h3><div class="descripcion editable" contenteditable="true">12&nbsp; unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto21.jpg"><h3 class="editable" contenteditable="true">chilenitos</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto22.jpg"><h3 class="editable" contenteditable="true">chilenitos</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 5.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto23.jpg"><h3 class="editable" contenteditable="true">alfajor ,aicena</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto24.jpg"><h3 class="editable" contenteditable="true">mendocinos</h3><div class="descripcion editable" contenteditable="true">18 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+
+        <h2 class="categoria-titulo">Pasteles</h2>
+        <div class="producto"><img src="foto25.jpg"><h3 class="editable" contenteditable="true">alfajores</h3><div class="descripcion editable" contenteditable="true">14 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto26.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto27.jpg"><h3 class="editable" contenteditable="true">huesitos</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto28.jpg"><h3 class="editable" contenteditable="true">cuchufli</h3><div class="descripcion editable" contenteditable="true">50 unidades</div><div class="precio editable" contenteditable="true">$4.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto29.jpg"><h3 class="editable" contenteditable="true">cuchufli</h3><div class="descripcion editable" contenteditable="true">90 unidades</div><div class="precio editable" contenteditable="true">$ 4.000</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto30.jpg"><h3 class="editable" contenteditable="true">pelè</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto31.jpg"><h3 class="editable" contenteditable="true">chilenitos coco</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto32.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto33.jpg"><h3 class="editable" contenteditable="true">delicias</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto34.jpg"><h3 class="editable" contenteditable="true">camote</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.900</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto35.jpg"><h3 class="editable" contenteditable="true">trufones</h3><div class="descripcion editable" contenteditable="true">30 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto36.jpg"><h3 class="editable" contenteditable="true">verona blanco</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+
+        <h2 class="categoria-titulo">Nuevos Productos</h2>
+        <div class="producto"><img src="foto37.jpg"><h3 class="editable" contenteditable="true">verona negro</h3><div class="descripcion editable" contenteditable="true">680 gramos</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto38.jpg"><h3 class="editable" contenteditable="true">principes</h3><div class="descripcion editable" contenteditable="true">20 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+        <div class="producto"><img src="foto39.jpg"><h3 class="editable" contenteditable="true">gomones&nbsp;</h3><div class="descripcion editable" contenteditable="true">40 unidades</div><div class="precio editable" contenteditable="true">$ 3.500</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button></div>
+
+    </div>
 </div>
 
 <script>
+// Función para cambiar de página (Inicio, Nosotros, Catálogo) estilo Aymaison
+function cambiarPagina(idSeccion, botonPresionado) {
+    const secciones = document.querySelectorAll('.pagina-seccion');
+    secciones.forEach(sec => sec.classList.remove('activa'));
+
+    const botones = document.querySelectorAll('.btn-nav');
+    botones.forEach(btn => btn.classList.remove('activo'));
+
+    document.getElementById(idSeccion).classList.add('activa');
+    botonPresionado.classList.add('activo');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
 function eliminarProducto(boton){
     if(confirm("¿Eliminar este producto?")){
         boton.closest(".producto").remove();
     }
 }
 
-function agregarProducto(){
-    const zona = document.getElementById("zonaProductos");
+function preguntarYAgregarProducto() {
+    const nombre = prompt("Nombre del producto nuevo:", "Nuevo dulce");
+    if (!nombre) return;
+    
+    const descripcion = prompt("Descripción o cantidad (ej: 20 unidades):", "20 unidades");
+    const precio = prompt("Precio (ej: $ 3.500):", "$ 3.500");
+    const foto = prompt("Nombre o enlace de la foto (ej: foto40.jpg):", "fotoNueva.jpg");
+
+    const zona = document.getElementById('zonaCatalogoPrincipal');
     const nuevo = document.createElement("div");
     nuevo.className = "producto";
-    nuevo.innerHTML = `<img src="fotoNueva.jpg"><h3 class="editable" contenteditable="true">Nombre del producto</h3><div class="descripcion editable" contenteditable="true">Escribe aquí la descripción</div><div class="precio editable" contenteditable="true">$ 0</div><button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button>`;
+    nuevo.innerHTML = `
+        <img src="${foto}">
+        <h3 class="editable" contenteditable="true">${nombre}</h3>
+        <div class="descripcion editable" contenteditable="true">${descripcion}</div>
+        <div class="precio editable" contenteditable="true">${precio}</div>
+        <button class="btn-eliminar" onclick="eliminarProducto(this)">🗑 Eliminar</button>
+    `;
     zona.appendChild(nuevo);
-    window.scrollTo({top:zona.scrollHeight, behavior:"smooth"});
+    window.scrollTo({top: zona.scrollHeight, behavior:"smooth"});
 }
 
 function consultarWhatsApp() {
-    const numeroTelefono = "56959732269";
+    const numeroTelefono = "+56959732269"; // Número oficial de tu nuevo logo
     const mensaje = "¡Hola! 🍬 Estuve viendo su catálogo en 'Mi Rica Dulce Tentación' y me gustaría hacerles un pedido o consultar por los productos. ¿Me pueden ayudar?";
     const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
     window.open(urlWhatsApp, "_blank");
